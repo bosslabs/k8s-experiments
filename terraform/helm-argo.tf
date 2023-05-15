@@ -47,3 +47,15 @@ resource "helm_release" "argo_apps" {
   namespace = kubernetes_namespace.argo.id
   name = "argocd-apps"
 }
+
+data "kubernetes_secret" "argocd_initial_admin_password" {
+  metadata {
+    name = "argocd-initial-admin-secret"
+    namespace = kubernetes_namespace.argo.id
+  }
+}
+
+output "argocd_initial_admin_password" {
+  sensitive = true
+  value = data.kubernetes_secret.argocd_initial_admin_password.data["password"]
+}

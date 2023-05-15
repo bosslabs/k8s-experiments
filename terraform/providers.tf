@@ -10,6 +10,10 @@ terraform {
       source = "hashicorp/helm"
       version = "2.9.0"
     }
+    argocd = {
+      source = "oboukili/argocd"
+      version = "5.3.0"
+    }
   }
 }
 
@@ -23,4 +27,13 @@ provider "helm" {
         config_path = "~/.kube/config"
         config_context = "kind-k8s-experiments"
     }
+}
+
+provider "argocd" {
+  username                  = "admin"
+  password                  = data.kubernetes_secret.argocd_initial_admin_password.data["password"]
+  port_forward_with_namespace = "argo"
+  kubernetes {
+    config_context = "kind-k8s-experiments"
+  }
 }

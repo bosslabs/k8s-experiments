@@ -11,10 +11,10 @@ See [Kind Install Instructions](./kind/INSTALL.md)
 Once your cluster is running, it should appear in the Lens Cluster directory, if not
 import it using the kubeconfig file.
 
-### Install Tfswitch (Terraform Package manager)
+### Install Tfswitch (Terraform version manager)
 [Here](https://tfswitch.warrensbox.com/Install/)
 
-### Deploy ArgoCD using terraform
+### Deploy ArgoCD + Ingress NGINX Application using Terraform
 ```bash
 cd terraform
 tfswitch
