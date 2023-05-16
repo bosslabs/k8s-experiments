@@ -14,6 +14,10 @@ terraform {
       source = "oboukili/argocd"
       version = "5.3.0"
     }
+    time = {
+      source = "hashicorp/time"
+      version = "0.9.1"
+    }
   }
 }
 
@@ -31,9 +35,11 @@ provider "helm" {
 
 provider "argocd" {
   username                  = "admin"
-  password                  = data.kubernetes_secret.argocd_initial_admin_password.data["password"]
+  password                  = "admin"
   port_forward_with_namespace = "argo"
   kubernetes {
     config_context = "kind-k8s-experiments"
   }
 }
+
+provider "time" {}

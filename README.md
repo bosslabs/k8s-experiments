@@ -14,10 +14,12 @@ import it using the kubeconfig file.
 ### Install Tfswitch (Terraform version manager)
 [Here](https://tfswitch.warrensbox.com/Install/)
 
-### Deploy ArgoCD + Ingress NGINX Application using Terraform
+### Deploy ArgoCD + Istio + Kiali using Terraform
 ```bash
 cd terraform
 tfswitch
 terraform init
 terraform apply
 ```
+
+**Note:** the login for ArgoCD is `admin:admin`

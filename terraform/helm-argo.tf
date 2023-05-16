@@ -30,6 +30,16 @@ resource "helm_release" "argo_cd" {
     name = "global.deploymentStrategy.type"
     value = "Recreate"
   }
+
+  set {
+    name = "configs.secret.argocdServerAdminPassword"
+    value = "$2y$10$jHApD9yjeGoLjx3DSd.bJujp3qSnFdFTHt5dn1mVLnybrqRvNjkzO" //admin
+  }
+
+  set {
+    name = "configs.secret.argocdServerAdminPasswordMtime"
+    value = "2021-01-01T10:11:12Z"
+  }
 }
 
 resource "helm_release" "argo_events" {
@@ -46,16 +56,4 @@ resource "helm_release" "argo_apps" {
 
   namespace = kubernetes_namespace.argo.id
   name = "argocd-apps"
-}
-
-data "kubernetes_secret" "argocd_initial_admin_password" {
-  metadata {
-    name = "argocd-initial-admin-secret"
-    namespace = kubernetes_namespace.argo.id
-  }
-}
-
-output "argocd_initial_admin_password" {
-  sensitive = true
-  value = data.kubernetes_secret.argocd_initial_admin_password.data["password"]
 }
